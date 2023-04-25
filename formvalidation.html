@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form validation</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1 class="text-center mt-3">Form Validation</h1>
+    <div class="container">
+        <form class="mt-3" onsubmit="return vform()">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Your name">
+                <p id="nameerror" style="color:red"></p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Your email">
+                <p id="emailerror" style="color:red"></p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Enter Your password">
+                <p id="phoneerror" style="color:red"></p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="pass" placeholder="Enter Your password">
+                <p id="passerror" style="color:red"></p>
+            </div>
+            <input type='submit' class="btn btn-primary">
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        vform = () => {
+            let name = document.getElementById('name')
+            let email = document.getElementById('email')
+            let phone = document.getElementById('phone')
+            let password = document.getElementById('pass')
+            let sub = 1;
+
+            //name validation
+            const nameRegex = /^([a-z])+([\s])+([a-z]{2,15})$/;
+            if (nameRegex.test(name.value)) {
+                document.getElementById('name').style.borderColor = 'green'
+                document.getElementById('nameerror').innerHTML = ''
+            } else {
+                document.getElementById('nameerror').innerHTML = 'Name is not valid'
+                document.getElementById('name').style.borderColor = 'red'
+                sub = 0;
+            }
+
+            //email validation
+            const emailRegex = /^([0-9a-z])+([@])+([a-z]{2,8})+([.])+([a-z]{2,4})$/;
+            if (emailRegex.test(email.value)) {
+                document.getElementById('email').style.borderColor = 'green'
+                document.getElementById('emailerror').innerHTML = ''
+            } else {
+                document.getElementById('emailerror').innerHTML = 'Email is not valid'
+                document.getElementById('email').style.borderColor = 'red'
+                sub = 0;
+            }
+
+            //phone validation
+            const phoneRegex = /^([0-9]){10}$/
+            if (phoneRegex.test(phone.value)) {
+                document.getElementById('phone').style.borderColor = 'green'
+                document.getElementById('phoneerror').innerHTML = ''
+            } else {
+                document.getElementById('phone').style.borderColor = 'red'
+                document.getElementById('phoneerror').innerHTML = 'Phone is not valid'
+                sub = 0;
+            }
+
+            //password validation
+            const passRegex = /^([0-9a-z@$#.]){8,16}$/
+            document.getElementById('pass').style.borderColor = 'green'
+            if (passRegex.test(password.value)) {
+                document.getElementById('passerror').innerHTML = ''
+            } else {
+                document.getElementById('pass').style.borderColor = 'red'
+                document.getElementById('passerror').innerHTML = 'Password is not valid '
+                sub = 0;
+            }
+
+
+            if (sub) {
+                alert('Your form is valid')
+                return true;
+            } else {
+                alert('Your form is not valid please check again')
+                return false;
+            }
+
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
